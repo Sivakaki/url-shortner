@@ -7,10 +7,9 @@ const urlSchema = new Schema(
       required: true,
       trim: true,
     },
-    shortUrl: {
+    shortCode: {
       type: String,
       required: true,
-      trim: true,
       unique: true,
     },
     user: {

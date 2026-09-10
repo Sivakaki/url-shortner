@@ -14,5 +14,7 @@ router.route("/login").post(loginUser);
 
 //secured routes
 
-router.route("./current-user").get(verifyJWT, getCurrentUser);
-router.route("./change-password").post(verifyJWT, changeCurrentPassword);
+router.route("/current-user").get(verifyJWT, getCurrentUser);
+router.route("/change-password").post(verifyJWT, changeCurrentPassword);
+
+export default router;
