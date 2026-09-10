@@ -46,16 +46,18 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Something went wrong while registering user");
   }
 
+  const createdUser = await User.findById(user._id).select("-password -refreshToken");
+
   return res
     .status(201)
-    .json(new ApiResponse(201, user, "User registered successfully"));
+    .json(new ApiResponse(201, createdUser, "User registered successfully"));
 });
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  if ([email, password].some((field) => !field.trim())) {
-    throw new ApiError(400, "All Fileds are required");
+  if ([email, password].some((field) => !field?.trim())) {
+    throw new ApiError(400, "All Fields are required");
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
